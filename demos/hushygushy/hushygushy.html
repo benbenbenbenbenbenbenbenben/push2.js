@@ -53,6 +53,10 @@ var touchstripLights = []
 var modeIndex = 0;
 var numModes = 2;
 
+romanNumerals = [
+    "-", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"
+]
+
 for(var i = 0; i++; i <= 30)
 {
     touchstripLights.push(0);
@@ -85,7 +89,7 @@ function noteToNoteName(n)
         ? noteNames[absIndex]
         : noteNames[12-absIndex];
 
-    octave = Math.floor((n + 57) / 12);
+    octave = romanNumerals[Math.floor((n + 57) / 12)];
 
     return letter+octave;
 }
@@ -216,7 +220,6 @@ var Trompette = function(frequencies)
     this.oscillator.connect(this.amplitude);
     this.amplitude.connect(this.gain);
     this.chien.connect(this.chienStep);
-    //this.chienShape.connect(this.chienStep);
     this.chienStep.connect(this.chienAmplitude);
     this.chienAmplitude.connect(this.gain);
     this.gain.connect(this.delay);
