@@ -1,0 +1,24 @@
+{
+  "name": "Window2Push2",
+  "description": "Display contents of a window on a Push 2 display",
+  "version": "0.1",
+  "manifest_version": 2,
+  "permissions": [
+      "desktopCapture",
+      "videoCapture",
+      "usb",
+      { "usbDevices": [
+          {
+              "vendorId": 10626,
+              "productId": 6503
+          }
+      ]}
+  ],
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "16": "push2-16.png", "128": "push2-128.png" }
+}
+

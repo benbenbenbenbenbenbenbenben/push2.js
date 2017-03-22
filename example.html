@@ -1,0 +1,118 @@
+<html>
+<script src="push2.js">
+</script>
+<script src="push2colours.js">
+</script>
+<body>
+
+<h1>push2.js examples</h1>
+
+<canvas id="example" width=960 height=160 onclick=""/>
+
+
+<script>
+window.requestAnimFrame = (function(callback)
+{
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+    function(callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+})();
+
+var push2 = new Push2();
+
+var canvas = document.getElementById("example");
+var drawContext = canvas.getContext('2d');
+drawContext.fillStyle = "#3388ff";
+drawContext.fillRect(0, 0, 960, 160);
+var xPos = 0;
+var xVel = 0;
+
+function animate()
+{
+    requestAnimFrame(function()
+    {
+        animate();
+    });
+
+    xPos += xVel;
+    xVel *= 0.9;
+
+    drawContext.fillStyle = "#3388ff";
+    drawContext.fillRect(0, 0, 960, 160);
+    drawContext.fillStyle = "#ffffff";
+    drawContext.font = "Sans 20px"
+    drawContext.fillText("Hello World!", xPos, 50);
+
+    if (push2.canSendCanvasToScreen())
+    {
+        console.log("Sending canvas")
+        push2.sendCanvasToScreen(drawContext);
+    }
+}
+
+push2.initialise(function () {
+    console.log("MIDI initialised")
+
+    push2.setPadColour(0, 0, push2.colour(128, 0, 255));
+    push2.setPadColour(1, 5, push2.colour(255, 0, 0));
+    push2.setPadColour(1, 6, push2.colour(255, 0, 0));
+    push2.setPadColour(2, 5, push2.colour(255, 0, 0), push2.transition.blink);
+    push2.setPadColour(2, 5, push2.colour(255, 255, 128), push2.transition.pulse);
+
+    push2.setButtonColour(
+        push2.buttons.duplicate,
+        push2.white(0),
+        push2.transition.pulse);
+
+    push2.setButtonColour(
+        push2.buttons.duplicate,
+        push2.white(255),
+        push2.transition.blink);
+
+    push2.setScreenTopButtonColour(3, push2.colour(0, 0, 255));
+    push2.setScreenBottomButtonColour(4, push2.colour(0, 255, 255));
+    push2.setSceneLaunchButtonColour(6, push2.colour(255, 255, 255));
+
+    push2.setTouchstripFlags({
+        pushControlsLEDs: false,
+        hostSendsValues: true,
+        valuesSentAsPitchBend: false,
+        ledsShowPoint: false,
+        barStartsAtBottom: true,
+        autoreturn: false,
+        autoreturnToCenter: false
+    });
+
+    push2.setTouchstripValue(60);
+
+    push2.padPressed = function (x, y, velocity)
+    {
+        if (x == 0 && y == 0) xVel += velocity/10.0;
+    }
+
+    animate();
+
+    /*
+    push2.setTouchstripFlags({
+        pushControlsLEDs: false,
+        hostSendsValues: false,
+        valuesSentAsPitchBend: false,
+        ledsShowPoint: false,
+        barStartsAtBottom: false,
+        autoreturn: false,
+        autoreturnToCenter: false
+    });
+
+    var lights = [];
+    for(var i = 0; i < 31; i++) {
+        lights.push(7);
+    }
+    lights[4] = 0;
+    push2.setTouchstripLights(lights);
+    */
+});
+</script>
+
+</body>
+</html>
