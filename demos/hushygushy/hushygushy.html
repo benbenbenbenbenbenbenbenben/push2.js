@@ -10,7 +10,7 @@
 <link href='https://fonts.googleapis.com/css?family=Aladin' rel='stylesheet' type='text/css'>
 
 </head>
-<body>
+<body background="wood.jpg">
 
 <h1>Hushy-Gushy</h1>
 
@@ -511,8 +511,9 @@ function animate()
 
     push2.setTouchstripLights(touchstripLights);
 
-    drawContext.fillStyle = "#663300";
-    drawContext.fillRect(0, 0, 960, 160);
+    //drawContext.fillStyle = "#663300";
+    //drawContext.fillRect(0, 0, 960, 160);
+    drawContext.clearRect(0, 0, 960, 160);
     stringSequencers.forEach(function (string) { string.displayCanvas(); });
 }
 
