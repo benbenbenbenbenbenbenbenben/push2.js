@@ -1,3 +1,8 @@
+# What is it?
+
+* A Javascript library for simple interfacing with Push 2 from Javascript, via WebMIDI
+* A very experimental Chrome plugin for showing the contents of a window on the Push 2 display
+
 # Requirements
 
 * Python 3 if you want to run the simple secure web server for testing
