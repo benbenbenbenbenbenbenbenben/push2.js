@@ -13,8 +13,8 @@
 
 * ```python3 secureHttpServer.py```
 * point your browser at one of these URLs and ignore the warning about the certificate
+  * https://localhost:4162/example.html
   * https://localhost:4162/demos/hushygushy/hushygushy.html
-  * https://localhost:4162/demos/example.html
 
 # Known issues
 
